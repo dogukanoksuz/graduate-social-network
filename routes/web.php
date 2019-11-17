@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Auth::routes();
+
+// User routes
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('profile', 'User\ProfileController');
+});
+
+// Superuser routes
+Route::group(['middleware' => ['CheckIfSuperuser']], function () {
+    // Route::get('/superuser', 'HomeController@index')->name('superuser');
 });

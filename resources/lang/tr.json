@@ -1,0 +1,22 @@
+{
+    "_comment": "Auth elementlerinin çevirileri",
+    "Login": "Giriş",
+    "Logout": "Çıkış",
+    "Register": "Kayıt Ol",
+    "Remember Me": "Beni Hatırla",
+    "E-Mail Address": "E-Posta Adresi",
+    "Password": "Şifre",
+    "Forgot Your Password?": "Şifrenizi mi unuttunuz?",
+    "Reset Password": "Şifreni Sıfırla",
+    "Send Password Reset Link": "Şifremi Sıfırla",
+    "Name": "Ad",
+    "Confirm Password": "Şifreniz (tekrar)",
+    "Dashboard": "Pano",
+    "Confirm Password Reset": "Şifrenizi Sıfırlayın",
+    "Please confirm your password before continuing.": "Devam etmeden önce şifrenizi giriniz.",
+    "Verify Your Email Address": "E-posta Adresinizi Onaylayın",
+    "A fresh verification link has been sent to your email address.": "Yeni onaylama linki e-posta adresinize gönderildi.",
+    "Before proceeding, please check your email for a verification link.": "Devam etmeden önce e-postanızı kontrol edin.",
+    "If you did not receive the email": "Eğer e-postayı almadıysanız",
+    "click here to request another": "buraya tıklayarak yeni link talep edin."
+}

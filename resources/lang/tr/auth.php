@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'Bilgileriniz kayıtlarımız ile uyuşmuyor.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => 'Fazla sayıda giriş denemesi yaptınız. :seconds saniye sonra tekrar deneyin.',
 
 ];

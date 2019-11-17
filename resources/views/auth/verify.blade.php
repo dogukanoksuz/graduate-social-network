@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ __('Verify Your Email Address') }} - {{ config('app.name') }}
+@endsection
 
 @section('content')
 <div class="container">
