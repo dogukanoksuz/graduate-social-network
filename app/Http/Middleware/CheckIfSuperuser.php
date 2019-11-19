@@ -21,6 +21,6 @@ class CheckIfSuperuser
             return $next($request);
         }
 
-        return redirect(route('home'))->with('error', 'Superuser erişiminiz yok.');
+        return redirect(route('home'))->withErrors(['Superuser erişiminiz yok.', 'Kullanıcı: ' . Auth::user()->id]);
     }
 }

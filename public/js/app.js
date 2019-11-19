@@ -2000,7 +2000,8 @@
         }
 
 
-        /***/ }),
+        /***/
+    }),
 
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
@@ -15966,7 +15967,8 @@ Popper.Defaults = Defaults;
         if (false) {
         }
 
-        /***/ }),
+        /***/
+    }),
 
 /***/ "./node_modules/shards-ui/dist/js/shards.min.js":
 /*!******************************************************!*\
@@ -16563,10 +16565,11 @@ module.exports = g;
         var shards_ui_dist_js_shards_min__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(shards_ui_dist_js_shards_min__WEBPACK_IMPORTED_MODULE_5__);
 
 
-
-
-
-
+        $(window).on("load", function () {
+            $(".loader").fadeOut(), $("#preloader").fadeOut("slow"), $("body").css({
+                overflow: "visible"
+            });
+        });
 
 /***/ }),
 

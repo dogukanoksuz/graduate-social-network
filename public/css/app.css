@@ -21,3 +21,41 @@ label {
   }
 }
 
+#preloader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999999999;
+}
+
+.loader {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.loader-figure {
+    background-image: url(/images/loader.gif?d8a74c822c7f417a185d9d66e3875a60);
+    width: 400px;
+    height: 300px;
+    float: left;
+    margin: 0 auto;
+}
+
+.loader-label {
+    color: #CE5F26;
+    white-space: nowrap;
+}
+

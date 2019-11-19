@@ -14,6 +14,7 @@ class CreateUserinfoTable extends Migration
     public function up()
     {
         Schema::create('user_info', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('type');
             $table->text('content');

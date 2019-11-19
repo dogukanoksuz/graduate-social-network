@@ -19,10 +19,12 @@ Auth::routes();
 // User routes
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::resource('profile', 'User\ProfileController');
+    Route::resource('profile', 'User\ProfileController')->only([
+        'index', 'show', 'edit', 'update'
+    ]);
 });
 
 // Superuser routes
-Route::group(['middleware' => ['CheckIfSuperuser']], function () {
-    // Route::get('/superuser', 'HomeController@index')->name('superuser');
+Route::group(['middleware' => ['superuser']], function () {
+    Route::get('/superuser', 'HomeController@index')->name('superuser');
 });

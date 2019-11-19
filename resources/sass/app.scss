@@ -16,3 +16,35 @@
     }
 }
 
+#preloader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999999999;
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.loader-figure {
+    background-image: url('../img/loader.gif');
+    width: 400px;
+    height: 300px;
+    float: left;
+    margin: 0 auto;
+}
+
+.loader-label {
+    color: #CE5F26;
+    white-space: nowrap;
+}

@@ -10,13 +10,19 @@
     <title>@yield('title', config('app.name', 'Mezun'))</title>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<div id="preloader">
+    <div class="loader">
+        <div class="loader-figure"></div>
+        <p class="loader-label">{{ config('app.name', 'Mezun') }}</p>
+    </div>
+</div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white navbar-fixed">
         <div class="container">
@@ -30,14 +36,11 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
 
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -55,7 +58,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('profile.index') }}" class="dropdown-item">
+                                <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
                                     Profil
                                 </a>
 
@@ -79,13 +82,14 @@
 
 
     <main class="py-4">
-        @if( Session::has('error') )
-            <div class="container">
+        @if ($errors->any())
+            <div class="container mb-5">
                 <div class="alert alert-danger">
-                    {{ Session::get('error') }}
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br>
+                    @endforeach
                 </div>
             </div>
-            <br>
         @endif
         @yield('content')
     </main>
