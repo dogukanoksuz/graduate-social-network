@@ -4,8 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\User\Post;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.show', ['user' => Auth::user()]);
+        $user = Auth::user();
+        $posts = $user->post()->orderBy('created_at', 'DESC')->paginate(5);
+        return view('profile.show', ['user' => $user, 'posts' => $posts]);
     }
 
     /**
@@ -38,7 +41,7 @@ class ProfileController extends Controller
         if ($user == null) {
             return abort(404);
         }
-        $posts = $user->post()->paginate(5);
+        $posts = $user->post()->orderBy('created_at', 'DESC')->paginate(5);
 
         return view('profile.show', ['user' => $user, 'posts' => $posts]);
     }
@@ -61,7 +64,6 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Application $app
      * @param Request $request
      * @param int $id
      * @return Response
@@ -98,9 +100,23 @@ class ProfileController extends Controller
      *
      * @param Request $request
      * @param $id
+     * @return RedirectResponse
      */
     public function storePost(Request $request, $id)
     {
+        try {
+            $this->validate($request, [
+                'post_content' => 'required|max:1000'
+            ]);
+        } catch (ValidationException $e) {
+            return $this->show($id)->withErrors(['1000 karakterden fazla içerik giremezsiniz.']);
+        }
 
+        $post = Post::create([
+            'content' => $request->post_content,
+            'user_id' => $id
+        ]);
+
+        return back()->withErrors(['Başarıyla eklendi!']);
     }
 }

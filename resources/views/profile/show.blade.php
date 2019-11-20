@@ -26,7 +26,11 @@
                             Yeni bir paylaşım yap
                         </div>
                         <div class="card-body">
-                            abcdef
+                            <form action="{{ route('profile.store_post', $user->id) }}" method="POST">
+                                @csrf
+                                <input type="text" name="post_content">
+                                <input type="submit" value="GÖNDER GELSİN">
+                            </form>
                         </div>
                     </div>
                 @endif
@@ -41,6 +45,9 @@
                                         alt="{{ $user->name }}"
                                         style="max-width: 36px; height: auto; border-radius: 36px;">
                                     &nbsp; {{ $user->name }}</a>
+                                <div class="float-right mt-1">
+                                    {{ $post->created_at->isoFormat('LLLL') }}
+                                </div>
                             </div>
                             <div class="card-body">
                                 {{ $post->content }}

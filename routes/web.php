@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', 'User\ProfileController')->only([
         'index', 'show', 'edit', 'update'
     ]);
-    Route::post('/profile/store-post', 'User\ProfileController@storePost')->name('profile.store_post');
+    Route::post('/profile/store-post/{id}', 'User\ProfileController@storePost')->name('profile.store_post');
 });
 
 // Superuser routes
