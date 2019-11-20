@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User\Info;
+use App\User\Post;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,5 +41,10 @@ class User extends Authenticatable
     public function info()
     {
         return $this->hasMany(Info::class);
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
     }
 }

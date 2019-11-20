@@ -20,47 +20,35 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <a href="{{ route('profile.show', $user->id) }}"><img
-                                src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="card-img-top"
-                                alt="{{ $user->name }}" style="max-width: 36px; height: auto; border-radius: 36px;">
-                            &nbsp; {{ $user->name }}</a>
+                @if (Auth::user()->id === $user->id)
+                    <div class="card mb-5">
+                        <div class="card-header">
+                            Yeni bir paylaşım yap
+                        </div>
+                        <div class="card-body">
+                            abcdef
+                        </div>
                     </div>
-                    <div class="card-body">
-                        Paylaşım 1
-                        Paylaşım 1
-                        Paylaşım 1
-                    </div>
-                </div>
+                @endif
 
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <a href="{{ route('profile.show', $user->id) }}"><img
-                                src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="card-img-top"
-                                alt="{{ $user->name }}" style="max-width: 36px; height: auto; border-radius: 36px;">
-                            &nbsp; {{ $user->name }}</a>
-                    </div>
-                    <div class="card-body">
-                        Paylaşım 1
-                        Paylaşım 1
-                        Paylaşım 1
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">
-                        <a href="{{ route('profile.show', $user->id) }}"><img
-                                src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="card-img-top"
-                                alt="{{ $user->name }}" style="max-width: 36px; height: auto; border-radius: 36px;">
-                            &nbsp; {{ $user->name }}</a>
-                    </div>
-                    <div class="card-body">
-                        Paylaşım 1
-                        Paylaşım 1
-                        Paylaşım 1
-                    </div>
-                </div>
+                @if (!empty($posts))
+                    @foreach ($posts as $post)
+                        <div class="card mb-5">
+                            <div class="card-header">
+                                <a href="{{ route('profile.show', $user->id) }}"><img
+                                        src="https://semantic-ui.com/images/avatar2/large/elyse.png"
+                                        class="card-img-top"
+                                        alt="{{ $user->name }}"
+                                        style="max-width: 36px; height: auto; border-radius: 36px;">
+                                    &nbsp; {{ $user->name }}</a>
+                            </div>
+                            <div class="card-body">
+                                {{ $post->content }}
+                            </div>
+                        </div>
+                    @endforeach
+                    {{ $posts->links() }}
+                @endif
             </div>
         </div>
     </div>

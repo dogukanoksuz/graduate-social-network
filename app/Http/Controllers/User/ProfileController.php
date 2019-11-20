@@ -4,16 +4,23 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 
 class ProfileController extends Controller
 {
+    /**
+     * Display profile
+     *
+     * @return Factory|View
+     */
     public function index()
     {
         return view('profile.show', ['user' => Auth::user()]);
@@ -28,7 +35,12 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        return view('profile.show', ['user' => $user]);
+        if ($user == null) {
+            return abort(404);
+        }
+        $posts = $user->post()->paginate(5);
+
+        return view('profile.show', ['user' => $user, 'posts' => $posts]);
     }
 
     /**
@@ -81,4 +93,14 @@ class ProfileController extends Controller
         return back();
     }
 
+    /**
+     * Store newly created post
+     *
+     * @param Request $request
+     * @param $id
+     */
+    public function storePost(Request $request, $id)
+    {
+
+    }
 }
