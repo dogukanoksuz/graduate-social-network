@@ -14,7 +14,11 @@
                         <h5 class="card-title">{{ $user->name }}</h5>
                         <p class="card-text">Kullanıcı hakkında kısmı gelecek</p>
                         @if (Auth::user()->id === $user->id)
-                            <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary">Profili Düzenle</a>
+                            <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary"><i
+                                    class="fas fa-user-edit mr-1"></i>Profili Düzenle</a>
+                        @else
+                            <a href="{{ route('chat.show', $user->id) }}" class="btn btn-primary"><i
+                                    class="fas fa-edit mr-1"></i>Yeni Mesaj</a>
                         @endif
                     </div>
                 </div>
@@ -25,11 +29,18 @@
                         <div class="card-header">
                             Yeni bir paylaşım yap
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-3">
                             <form action="{{ route('profile.store_post', $user->id) }}" method="POST">
                                 @csrf
-                                <input type="text" name="post_content">
-                                <input type="submit" value="GÖNDER GELSİN">
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control" name="post_content"
+                                              placeholder="Bugün ne hissediyorsun?"></textarea>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="fas fa-paper-plane mr-1"></i> Paylaş
+                                        </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

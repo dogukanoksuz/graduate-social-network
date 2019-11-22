@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User\Chat\Chat;
 use App\User\Info;
 use App\User\Post;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,5 +47,10 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function chat()
+    {
+        return $this->hasMany(Chat::class);
     }
 }

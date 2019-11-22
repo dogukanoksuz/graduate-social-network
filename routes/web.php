@@ -18,11 +18,21 @@ Auth::routes();
 
 // User routes
 Route::group(['middleware' => ['auth']], function () {
+    // Index list
     Route::get('/', 'HomeController@index')->name('home');
+
+    // Profile edit, show etc.
     Route::resource('profile', 'User\ProfileController')->only([
         'index', 'show', 'edit', 'update'
     ]);
+
+    // Profile post store
     Route::post('/profile/store-post/{id}', 'User\ProfileController@storePost')->name('profile.store_post');
+
+    // Message controller
+    Route::get('/chat', 'User\Chat\ChatController@index')->name('chat.index');
+    Route::get('/chat/{id}', 'User\Chat\ChatController@show')->name('chat.show');
+    Route::post('/chat/store/{id}', 'User\Chat\ChatController@storeChat')->name('chat.store');
 });
 
 // Superuser routes

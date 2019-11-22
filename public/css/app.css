@@ -3,27 +3,28 @@ label {
     font-family: "Poppins", serif;
 }
 
+img {
+    max-width: 100%;
+}
+
 @media only screen and (min-width: 768px) {
-    body {
+    #app {
         position: relative;
         min-height: 100vh;
     }
 
-    #app {
-        min-height: 100vh;
-    }
-
-    body::after {
+    #app::after {
         content: "";
         display: block;
-        height: 60px;
+        height: 45px;
         /* Set same as footer's height */
     }
 
     .footer {
-        position: relative;
-        min-height: 60px;
-        height: auto !important;
+        position: absolute;
+        bottom: 0;
+        height: 45px;
+        width: 100%;
   }
 }
 
@@ -63,5 +64,111 @@ label {
 .loader-label {
     color: #CE5F26;
     white-space: nowrap;
+}
+
+.navbar-toggler {
+    border: 0 !important;
+}
+
+.inbox-chat {
+    height: 70vh;
+    overflow-y: scroll;
+    border-radius: 0 0 10px 10px;
+}
+
+.chat-history {
+    float: left;
+    padding: 0 0 0 15px;
+    width: 88%;
+}
+
+.chat-history h5 {
+    font-size: 15px;
+    color: #464646;
+    margin: 0 0 8px 0;
+}
+
+.chat-history h5 span {
+    font-size: 13px;
+    float: right;
+}
+
+.chat-history p {
+    font-size: 14px;
+    color: #989898;
+    margin: auto;
+}
+
+.chat-img {
+    float: left;
+    width: 11%;
+}
+
+.chat-people {
+    overflow: hidden;
+    clear: both;
+}
+
+.chat-list {
+    border-bottom: 1px solid #c4c4c4;
+    margin: 0;
+    padding: 18px 16px 10px;
+}
+
+.active-chat {
+    background: #ebebeb;
+}
+
+.incoming-message-img {
+    display: inline-block;
+    width: 6%;
+}
+
+.received-message {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+}
+
+.received-withd-message p {
+    background-color: rgba(90, 97, 105, 0.06);
+    border-radius: 0.625rem;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.time-date {
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+}
+
+.received-withd-message {
+    max-width: 65%;
+}
+
+.sent-message {
+    float: right;
+    max-width: 57%;
+}
+
+.sent-message p {
+    background-color: rgba(90, 97, 105, 0.06);
+    border-radius: 0.625rem;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.outgoing-message {
+    overflow: hidden;
+    margin: 26px 0 26px;
+}
+
+.message-history {
+    height: calc(70vh - 65px);
+    overflow-y: auto;
 }
 
