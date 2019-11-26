@@ -13,7 +13,7 @@
                         <div class="card mb-5">
                             <div class="card-header">
                                 <a href="{{ route('profile.show', $post->user()->first()->id) }}"><img
-                                        src="https://semantic-ui.com/images/avatar2/large/elyse.png"
+                                        src="{{ $post->user()->first()->profile_picture }}"
                                         class="card-img-top"
                                         alt="{{ $post->user()->first()->name }}"
                                         style="max-width: 36px; height: auto; border-radius: 36px;">
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="card-img-top"
+                    <img src="{{ Auth::user()->profile_picture }}" class="card-img-top"
                          alt="{{ Auth::user()->name }}">
                     <div class="card-body text-center" style="padding: 15px">
                         <h5 class="card-title">{{ Auth::user()->name }}</h5>

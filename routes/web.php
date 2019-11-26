@@ -25,17 +25,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', 'User\ProfileController')->only([
         'index', 'show', 'edit', 'update'
     ]);
-
-    // Profile post store
     Route::post('/profile/store-post/{id}', 'User\ProfileController@storePost')->name('profile.store_post');
 
     // Message controller
     Route::get('/chat', 'User\Chat\ChatController@index')->name('chat.index');
     Route::get('/chat/{id}', 'User\Chat\ChatController@show')->name('chat.show');
-    Route::post('/chat/store/{id}', 'User\Chat\ChatController@storeChat')->name('chat.store');
+    Route::post('/chat/send-message/{id}', 'User\Chat\ChatController@sendMessage')->name('chat.send');
 });
 
 // Superuser routes
-Route::group(['middleware' => ['superuser']], function () {
+Route::group(['middleware' => ['auth', 'superuser']], function () {
     Route::get('/superuser', 'HomeController@index')->name('superuser');
 });

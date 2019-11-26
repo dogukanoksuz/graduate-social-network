@@ -76,9 +76,18 @@ class ProfileController extends Controller
                 $this->validate($request, [
                     'name' => 'required|string|max:255',
                     'email' => 'required|email|unique:users,email,' . $id,
+                    'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
             } catch (ValidationException $e) {
-                return view('profile.edit', ['user' => $user->first()])->withErrors(['Girdinizde hata bulunuyor.']);
+                return back()->withErrors(['Girdinizde hata bulunuyor.']);
+            }
+
+            if (!empty($request->profile_picture)) {
+                $imageName = time() . '.' . $request->profile_picture->extension();
+                $request->profile_picture->move(public_path('storage/profile'), $imageName);
+                $user->update([
+                    'profile_picture' => '/storage/profile/' . $imageName
+                ]);
             }
 
             $user->update([
@@ -90,7 +99,7 @@ class ProfileController extends Controller
                 $user->update(['password' => Hash::make($request->password)]);
             }
 
-            return view('profile.edit', ['user' => $user->first()])->withErrors(['Başarıyla kayıt edildi!', $request->getPassword()]);
+            return back()->with('success', 'Başarıyla kayıt edildi!');
         }
         return back();
     }
@@ -109,7 +118,7 @@ class ProfileController extends Controller
                 'post_content' => 'required|max:1000'
             ]);
         } catch (ValidationException $e) {
-            return $this->show($id)->withErrors(['1000 karakterden fazla içerik giremezsiniz.']);
+            return back()->withErrors(['1000 karakterden fazla içerik giremezsiniz.']);
         }
 
         $post = Post::create([
@@ -117,6 +126,6 @@ class ProfileController extends Controller
             'user_id' => $id
         ]);
 
-        return back()->withErrors(['Başarıyla eklendi!']);
+        return back()->with('success', 'Başarıyla eklendi');
     }
 }

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
-                    <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="card-img-top"
+                    <img src="{{ Auth::user()->profile_picture }}" class="card-img-top"
                          alt="{{ $user->name }}">
                     <div class="card-body text-center" style="padding: 15px">
                         <h5 class="card-title">{{ $user->name }}</h5>
@@ -51,7 +51,7 @@
                         <div class="card mb-5">
                             <div class="card-header">
                                 <a href="{{ route('profile.show', $user->id) }}"><img
-                                        src="https://semantic-ui.com/images/avatar2/large/elyse.png"
+                                        src="{{ $user->profile_picture }}"
                                         class="card-img-top"
                                         alt="{{ $user->name }}"
                                         style="max-width: 36px; height: auto; border-radius: 36px;">

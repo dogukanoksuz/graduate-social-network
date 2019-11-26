@@ -26,7 +26,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="{{ route('profile.update', $user->id) }}" method="POST">
+                                <form action="{{ route('profile.update', $user->id) }}" method="POST"
+                                      enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group row">
@@ -48,6 +49,15 @@
                                         <div class="col-8">
                                             <input id="password" name="password" placeholder="Yeni şifreniz"
                                                    class="form-control here" type="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="avatarFile" class="col-4 col-form-label">Profil resmi yükle</label>
+                                        <div class="col-8">
+                                            <input type="file" class="form-control-file form-control"
+                                                   name="profile_picture" id="avatarFile" aria-describedby="fileHelp">
+                                            <small id="fileHelp" class="form-text text-muted">Lütfen geçerli bir imaj
+                                                dosyası yükleyin. İmaj dosyasının boyutu 2MB'yi geçmemelidir.</small>
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -62,6 +62,10 @@
                                     Profil
                                 </a>
 
+                                <a href="{{ route('chat.index') }}" class="dropdown-item">
+                                    Mesajlar
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -88,6 +92,14 @@
                     @foreach ($errors->all() as $error)
                         {{ $error }}<br>
                     @endforeach
+                </div>
+            </div>
+        @endif
+
+        @if ($message = Session::get('success'))
+            <div class="container mb-5">
+                <div class="alert alert-success">
+                    {{ $message }}
                 </div>
             </div>
         @endif
