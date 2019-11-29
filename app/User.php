@@ -3,8 +3,8 @@
 namespace App;
 
 use App\User\Chat\Chat;
-use App\User\Info;
 use App\User\Post;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -49,13 +49,33 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function sentChat()
+    public function followers()
     {
-        return $this->hasMany(Chat::class, 'from');
+        return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
     }
 
-    public function receivedChat()
+    public function followings()
     {
-        return $this->hasMany(Chat::class, 'to');
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
+    }
+
+    public function isFollowing($id)
+    {
+        foreach ($this->followings()->get() as $followings)
+        {
+            if ($followings->id === $id)
+                return true;
+        }
+        return false;
+    }
+
+    public function commment()
+    {
+        return $this->hasMany(Post\Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany('App\Post', 'likes', 'user_id', 'post_id');
     }
 }

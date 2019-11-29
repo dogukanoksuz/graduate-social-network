@@ -4,9 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use App\User\Post;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -104,28 +102,4 @@ class ProfileController extends Controller
         return back();
     }
 
-    /**
-     * Store newly created post
-     *
-     * @param Request $request
-     * @param $id
-     * @return RedirectResponse
-     */
-    public function storePost(Request $request, $id)
-    {
-        try {
-            $this->validate($request, [
-                'post_content' => 'required|max:1000'
-            ]);
-        } catch (ValidationException $e) {
-            return back()->withErrors(['1000 karakterden fazla içerik giremezsiniz.']);
-        }
-
-        $post = Post::create([
-            'content' => $request->post_content,
-            'user_id' => $id
-        ]);
-
-        return back()->with('success', 'Başarıyla eklendi');
-    }
 }

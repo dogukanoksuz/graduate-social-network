@@ -31,7 +31,7 @@
                                 <span class="chat-date">{{ $oneChat->updated_at->isoFormat('LlL') }}</span>
                             </h5>
                             @php
-                                use App\User\Chat\Message;$latestMessage = Message::where('chat_id', $oneChat->id)->orderBy('created_at', 'DESC')->first();
+                                $latestMessage = \App\User\Chat\Message::where('chat_id', $oneChat->id)->orderBy('created_at', 'DESC')->first();
                             @endphp
                             <p>@if($latestMessage !== null) {{ $latestMessage->content }} @endif</p>
                         </div>

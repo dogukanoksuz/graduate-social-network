@@ -1,12 +1,14 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../../node_modules/shards-ui/dist/css/shards.min.css';
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
 .card-header, label {
     font-family: 'Poppins', serif;
 }
 
-
 img {
     max-width: 100%;
 }
-
 
 @media only screen and (min-width: 768px) {
     #app {

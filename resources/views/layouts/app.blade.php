@@ -6,15 +6,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>@yield('title', config('app.name', 'Mezun'))</title>
 
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="preloader">
@@ -51,10 +46,23 @@
                             </li>
                         @endif
                     @else
+                        <form class="form-inline mr-3" action="{{ route('search') }}" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="s" placeholder="Kullanıcı arama..."
+                                       style="border-radius: .325rem 0 0 .325rem">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <img class="mr-2" src="{{ Auth::user()->profile_picture }}"
+                                     alt="{{ Auth::user()->name }}"
+                                     style="max-height: 36px; width: auto; border-radius: 32px;">{{ Auth::user()->name }}
+                                <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -113,5 +121,8 @@
         </div>
     </footer>
 </div>
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
