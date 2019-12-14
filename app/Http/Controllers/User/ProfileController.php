@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -68,13 +69,14 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->id == $id) {
+        if (Auth::user()->id == $id || Auth::user()->is_superuser) {
             $user = User::where('id', $id);
             try {
                 $this->validate($request, [
                     'name' => 'required|string|max:255',
                     'email' => 'required|email|unique:users,email,' . $id,
                     'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'about' => 'max:500'
                 ]);
             } catch (ValidationException $e) {
                 return back()->withErrors(['Girdinizde hata bulunuyor.']);
@@ -90,7 +92,8 @@ class ProfileController extends Controller
 
             $user->update([
                 'name' => $request->name,
-                'email' => $request->email
+                'email' => $request->email,
+                'about' => $request->about
             ]);
 
             if (!empty($request->password)) {
@@ -102,4 +105,53 @@ class ProfileController extends Controller
         return back();
     }
 
+
+    /**
+     * Follow new user
+     *
+     * @param $profileId
+     * @return RedirectResponse
+     */
+    public function followUser($profileId)
+    {
+        $user = User::find($profileId);
+        if (!$user) {
+            return redirect()->back()->with('error', 'Böyle bir kullanıcı bulunmamakta.');
+        }
+
+        $user->followers()->attach(auth()->user()->id);
+        return back()->with('success', 'Kullanıcı takip edildi');
+    }
+
+    /**
+     * Unfollow user
+     *
+     * @param int $profileId
+     * @return RedirectResponse
+     */
+    public function unFollowUser(int $profileId)
+    {
+        $user = User::find($profileId);
+        if (!$user) {
+            return redirect()->back()->with('error', 'Kullanıcı bulunamadı.');
+        }
+        $user->followers()->detach(auth()->user()->id);
+        return back()->with('success', 'Kullanıcı takipten çıkıldı.');
+    }
+
+    public function followers($profileId)
+    {
+        $user = User::find($profileId);
+        $followers = $user->followers;
+
+        return view('profile.followers', ['users' => $followers]);
+    }
+
+    public function following($profileId)
+    {
+        $user = User::find($profileId);
+        $following = $user->followings;
+
+        return view('profile.following', ['users' => $following]);
+    }
 }

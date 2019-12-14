@@ -19,12 +19,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->followed == 1)
+        if ($request->allposts == 1)
         {
+            $posts = Post::orderBy('created_at', 'DESC')->paginate(25);
+        } else {
             $followed = Auth::user()->followings()->get()->pluck(['id']);
             $posts = Post::whereIn('user_id', $followed)->orderBy('created_at', 'DESC')->paginate(25);
-        } else {
-            $posts = Post::orderBy('created_at', 'DESC')->paginate(25);
         }
 
         return view('home', ['posts' => $posts, 'req' => $request]);

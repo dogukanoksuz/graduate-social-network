@@ -85,16 +85,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="{{ Auth::user()->profile_picture }}" class="card-img-top"
-                         alt="{{ Auth::user()->name }}">
-                    <div class="card-body text-center" style="padding: 15px">
-                        <h5 class="card-title">{{ Auth::user()->name }}</h5>
-                        <p class="card-text">Kullanıcı hakkında kısmı gelecek</p>
-                        <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-primary"><i
-                                class="fas fa-user-edit mr-1"></i>Profili Düzenle</a>
-                    </div>
-                </div>
+                @php
+                    $user = Auth::user()
+                @endphp
+                @include('profile.profile_embed')
             </div>
         </div>
     </div>

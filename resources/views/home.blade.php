@@ -6,29 +6,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-
-            <div class="col-md-12">
-                @if($req->followed != 1)
-                    <h4>
-                        Tüm üyelerden gelen gönderiler görüntüleniyor.
-                    </h4>
-                    <a href="{{ route('home', ['followed' => 1]) }}">
-                        Sadece takip ettiklerim görünümüne değiştir.
-                    </a>
-                @else
-                    <h4>
-                        Takip ettiğiniz kişilerin gönderileri görüntüleniyor.
-                    </h4>
-                    <a href="{{ route('home') }}">
-                        Tüm üyeler görünümüne değiştir.
-                    </a>
-                @endif
-
-                <br>
-                <br>
-            </div>
             <div class="col-md-9">
-
+                @if ($req->allposts == 1)
+                    <h4>Tüm gönderileri görüntülüyorsunuz.</h4>
+                    <br>
+                @endif
                 @if (!empty($posts))
                     @foreach ($posts as $post)
                         <div class="card mb-5">
@@ -56,7 +38,7 @@
                                     @if(count($likes) > 0)
                                         <li class="mb-4">
                                             <a href="{{ route('post.likes', $post->id) }}">
-                                            {{ count($likes) }} kişi beğendi!
+                                                {{ count($likes) }} kişi beğendi!
                                             </a>
                                         </li>
                                     @endif
@@ -137,17 +119,10 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="card">
-                    <img src="{{ Auth::user()->profile_picture }}" class="card-img-top"
-                         alt="{{ Auth::user()->name }}">
-                    <div class="card-body text-center" style="padding: 15px">
-                        <h5 class="card-title">{{ Auth::user()->name }}</h5>
-                        <p class="card-text">Kullanıcı hakkında kısmı gelecek</p>
-                        <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-primary"><i
-                                class="fas fa-user-edit mr-1"></i>Profili Düzenle</a>
-                    </div>
-                </div>
+                @php
+                    $user = Auth::user()
+                @endphp
+                @include('profile.profile_embed')
             </div>
         </div>
     </div>

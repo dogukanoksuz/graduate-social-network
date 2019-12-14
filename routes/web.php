@@ -33,8 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/profile/store-post/{id}', 'User\PostController@storePost')->name('profile.store_post');
 
     // Follow, unfollow
-    Route::get('/profile/{profileId}/follow', 'User\PostController@followUser')->name('profile.follow');
-    Route::get('/profile/{profileId}/unfollow', 'User\PostController@unFollowUser')->name('profile.unfollow');
+    Route::get('/profile/{profileId}/follow', 'User\ProfileController@followUser')->name('profile.follow');
+    Route::get('/profile/{profileId}/unfollow', 'User\ProfileController@unFollowUser')->name('profile.unfollow');
+    Route::get('/profile/{profileId}/followers', 'User\ProfileController@followers')->name('profile.followers');
+    Route::get('/profile/{profileId}/following', 'User\ProfileController@following')->name('profile.following');
 
     // Like
     Route::get('/post/{postId}/like', 'User\PostController@like')->name('post.like');
@@ -48,9 +50,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/chat', 'User\Chat\ChatController@index')->name('chat.index');
     Route::get('/chat/{id}', 'User\Chat\ChatController@show')->name('chat.show');
     Route::post('/chat/send-message/{id}', 'User\Chat\ChatController@sendMessage')->name('chat.send');
+
+    // Companies
+    Route::get('/company', 'User\CompanyController@index')->name('companies.list');
 });
 
 // Superuser routes
 Route::group(['middleware' => ['auth', 'superuser']], function () {
-    Route::get('/superuser', 'HomeController@index')->name('superuser');
+    Route::get('/superuser', 'SuperuserController@index')->name('superuser.index');
+
+    // Company controller
+    Route::resource('/superuser/company', 'Superuser\CompanyController')->except('show');
 });

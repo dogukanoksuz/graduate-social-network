@@ -61,6 +61,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="about" class="col-4 col-form-label">Biyografi</label>
+                                        <div class="col-8">
+                                            <textarea id="about" name="about"
+                                                      class="form-control here"
+                                                      type="textarea">{{ $user->about }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="offset-4 col-8">
                                             <button name="submit" type="submit" class="btn btn-primary">Profilimi
                                                 güncelle

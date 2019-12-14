@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
-
     /**
      * Store newly created post
      *
@@ -40,38 +39,6 @@ class PostController extends Controller
         return back()->with('success', 'Başarıyla eklendi');
     }
 
-    /**
-     * Follow new user
-     *
-     * @param $profileId
-     * @return RedirectResponse
-     */
-    public function followUser($profileId)
-    {
-        $user = User::find($profileId);
-        if (!$user) {
-            return redirect()->back()->with('error', 'Böyle bir kullanıcı bulunmamakta.');
-        }
-
-        $user->followers()->attach(auth()->user()->id);
-        return back()->with('success', 'Kullanıcı takip edildi');
-    }
-
-    /**
-     * Unfollow user
-     *
-     * @param int $profileId
-     * @return RedirectResponse
-     */
-    public function unFollowUser(int $profileId)
-    {
-        $user = User::find($profileId);
-        if (!$user) {
-            return redirect()->back()->with('error', 'Kullanıcı bulunamadı.');
-        }
-        $user->followers()->detach(auth()->user()->id);
-        return back()->with('success', 'Kullanıcı takipten çıkıldı.');
-    }
 
     public function listComments($postId)
     {

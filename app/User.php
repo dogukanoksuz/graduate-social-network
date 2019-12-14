@@ -2,9 +2,7 @@
 
 namespace App;
 
-use App\User\Chat\Chat;
 use App\User\Post;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_picture'
+        'name', 'email', 'password', 'profile_picture', 'about'
     ];
 
     /**

@@ -20,7 +20,7 @@
 </div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white navbar-fixed">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="fas fa-user-graduate mr-2"></i>{{ config('app.name', 'Laravel') }}
             </a>
@@ -32,7 +32,19 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    @guest
 
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('companies.list') }}" class="nav-link">Firmalar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">İş İlanları</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('home', ['allposts' => 1]) }}" class="nav-link">Tüm Gönderiler</a>
+                        </li>
+                    @endguest
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
@@ -73,6 +85,12 @@
                                 <a href="{{ route('chat.index') }}" class="dropdown-item">
                                     Mesajlar
                                 </a>
+
+                                @if (Auth::user()->is_superuser)
+                                    <a href="{{ route('superuser.index') }}" class="dropdown-item">
+                                        Superuser
+                                    </a>
+                                @endif
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
