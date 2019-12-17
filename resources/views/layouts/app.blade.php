@@ -19,8 +19,9 @@
     </div>
 </div>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white navbar-fixed">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+         style="box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1">
+        <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="fas fa-user-graduate mr-2"></i>{{ config('app.name', 'Laravel') }}
             </a>
@@ -39,7 +40,10 @@
                             <a href="{{ route('companies.list') }}" class="nav-link">Firmalar</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">İş İlanları</a>
+                            <a href="{{ route('jobs') }}" class="nav-link">İş İlanları</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('intern') }}" class="nav-link">Staj İlanları</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('home', ['allposts' => 1]) }}" class="nav-link">Tüm Gönderiler</a>
@@ -132,7 +136,7 @@
         @yield('content')
     </main>
 
-    <footer class="footer bg-white">
+    <footer class="footer">
         <div class="container text-center" style="font-family: 'Poppins'">
             Copyright &copy; {{ \Carbon\Carbon::now()->format('Y') }} {{ config('app.name', 'Mezun') }}, <a
                 href="https://dogukan.dev">N.E.T. Code</a>

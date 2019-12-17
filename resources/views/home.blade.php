@@ -8,8 +8,60 @@
         <div class="row">
             <div class="col-md-9">
                 @if ($req->allposts == 1)
-                    <h4>Tüm gönderileri görüntülüyorsunuz.</h4>
-                    <br>
+                    <div class="jumbotron">
+                        <p class="lead">Tüm gönderileri görüntülüyorsunuz.</p>
+                        <hr class="my-4">
+                        <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button">Sadece takip
+                            ettiklerimi göster</a>
+                    </div>
+                @else
+                    <div class="card mb-5">
+                        <div class="card-header">
+                            Yeni bir paylaşım yap
+                        </div>
+                        <div class="card-body p-3">
+                            <form action="{{ route('profile.store_post', Auth::user()->id) }}" method="POST">
+                                @csrf
+                                <div class="radio-buttons float-left mb-3">
+                                    <fieldset class="float-left">
+                                        <div class="custom-control custom-radio float-left mr-4">
+                                            <input type="radio"
+                                                   id="paylasim"
+                                                   name="share_selector"
+                                                   class="custom-control-input"
+                                                   value="share"
+                                                   checked><label
+                                                class="custom-control-label" for="paylasim">Paylaşım</label></div>
+                                    </fieldset>
+                                    <fieldset class="float-left">
+                                        <div class="custom-control custom-radio float-left mr-4"><input type="radio"
+                                                                                                        id="is-ilani"
+                                                                                                        name="share_selector"
+                                                                                                        value="work"
+                                                                                                        class="custom-control-input"><label
+                                                class="custom-control-label" for="is-ilani">İş ilanı</label></div>
+                                    </fieldset>
+                                    <fieldset class="float-left">
+                                        <div class="custom-control custom-radio float-left mr-4"><input type="radio"
+                                                                                                        id="staj-ilani"
+                                                                                                        name="share_selector"
+                                                                                                        value="intern"
+                                                                                                        class="custom-control-input"><label
+                                                class="custom-control-label" for="staj-ilani">Staj ilanı</label></div>
+                                    </fieldset>
+                                </div>
+                                <div class="input-group">
+                                    <textarea type="text" class="form-control" name="post_content"
+                                              placeholder="Bugün ne hissediyorsun?"></textarea>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="fas fa-paper-plane mr-1"></i> Paylaş
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 @endif
                 @if (!empty($posts))
                     @foreach ($posts as $post)
@@ -21,6 +73,7 @@
                                         alt="{{ $post->user()->first()->name }}"
                                         style="max-width: 36px; height: auto; border-radius: 36px;">
                                     &nbsp; {{ $post->user()->first()->name }}</a>
+                                {!! $post->getPostTypeInformation() !!}
                                 <div class="float-right mt-1">
                                     <a href="{{ route('post.listcomments', $post->id) }}">{{ $post->created_at->isoFormat('LLLL') }}</a>
                                 </div>
@@ -104,25 +157,18 @@
                 @endif
             </div>
             <div class="col-md-3">
-                <div class="card mb-5">
-                    <div class="card-header">
-                        Yeni bir paylaşım yap
-                    </div>
-                    <div class="card-body p-3">
-                        <form action="{{ route('profile.store_post', Auth::user()->id) }}" method="POST">
-                            @csrf
-                            <textarea type="text" class="form-control" name="post_content"
-                                      placeholder="Bugün ne hissediyorsun?"></textarea>
-                            <button class="btn btn-primary w-100 mt-2" type="submit"><i class="fas fa-paper-plane"></i>
-                            </button>
-
-                        </form>
-                    </div>
-                </div>
                 @php
                     $user = Auth::user()
                 @endphp
-                @include('profile.profile_embed')
+                @include('elements.profile_embed')
+                <div class="card  mt-5 mb-5">
+                    <div class="card-header">
+                        Yeni üyelerimiz
+                    </div>
+                    <div class="card-body p-3">
+                        @include('elements.new_members')
+                    </div>
+                </div>
             </div>
         </div>
     </div>

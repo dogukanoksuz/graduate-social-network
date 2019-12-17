@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class Post extends Model
 {
     protected $fillable = [
-        'content', 'user_id'
+        'content', 'user_id', 'type'
     ];
 
     public function user()
@@ -34,5 +34,17 @@ class Post extends Model
             return true;
         }
         return false;
+    }
+
+    public function getPostTypeInformation()
+    {
+        switch ($this->type) {
+            case "work":
+                return "<span class=\"ml-2 badge badge-success\">İş ilanı</span>";
+            case "intern":
+                return "<span class=\"ml-2 badge badge-info\">Staj ilanı</span>";
+            default:
+                return "";
+        }
     }
 }

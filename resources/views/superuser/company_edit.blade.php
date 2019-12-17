@@ -4,10 +4,10 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             @include('superuser.nav')
-            <div class="col-lg-10">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">Firma Düzenle</div>
                     <div class="card-body">
@@ -25,8 +25,13 @@
                             <div class="form-group row">
                                 <label for="logoFile" class="col-4 col-form-label">Şirket logosu</label>
                                 <div class="col-8">
-                                    <input type="file" class="form-control-file form-control"
-                                           name="picture" id="logoFile" aria-describedby="fileHelp">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                               name="picture" id="logoFile" aria-describedby="fileHelp">
+                                        <label class="custom-file-label" for="logoFile">Dosya seç <i
+                                                class="fas fa-upload"></i></label>
+
+                                    </div>
                                     <small id="fileHelp" class="form-text text-muted">Lütfen geçerli bir imaj
                                         dosyası yükleyin. İmaj dosyasının boyutu 2MB'yi geçmemelidir.</small>
                                 </div>

@@ -2,6 +2,10 @@
 @import '../../node_modules/shards-ui/dist/css/shards.min.css';
 @import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
+body {
+    margin-top: 80px;
+}
+
 .card-header, label {
     font-family: 'Poppins', serif;
 }
@@ -13,7 +17,7 @@ img {
 @media only screen and (min-width: 768px) {
     #app {
         position: relative;
-        min-height: 100vh;
+        min-height: calc(100vh - 80px);
     }
     #app::after {
         content: '';
@@ -168,3 +172,10 @@ img {
     height: calc(70vh - 65px);
     overflow-y: auto;
 }
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+

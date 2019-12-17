@@ -62,7 +62,7 @@ class CompanyController extends Controller
             'company_info' => $request->company_info
         ]);
 
-        return redirect(route('company.index'))->with(['success' => 'Firma başarıyla oluşturuldu!']);
+        return redirect(route('company.index'))->with('success', 'Firma başarıyla oluşturuldu!');
     }
 
     /**
@@ -97,7 +97,7 @@ class CompanyController extends Controller
                 'address' => 'max:500',
             ]);
         } catch (ValidationException $e) {
-            return back()->withErrors(['Girdinizde hata bulunuyor.']);
+            return redirect(route('company.index'))->withErrors(['Girdinizde hata bulunuyor.']);
         }
 
         if (!empty($request->picture)) {
@@ -115,7 +115,7 @@ class CompanyController extends Controller
             'company_info' => $request->company_info
         ]);
 
-        return back()->with('success', 'Başarıyla düzenlendi!');
+        return redirect(route('company.index'))->with('success', 'Başarıyla düzenlendi!');
     }
 
     /**
@@ -129,6 +129,6 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $company->destroy($id);
 
-        return redirect(route('company.index'))->with(['success' => 'Başarıyla silindi!']);
+        return redirect(route('company.index'))->with('success', 'Başarıyla silindi!');
     }
 }

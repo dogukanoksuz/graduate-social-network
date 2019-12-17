@@ -1,5 +1,5 @@
-<div class="col-lg-2 mb-4">
-    <div class="card">
+<div class="col-lg-3 mb-4">
+    <div class="card  mb-4">
         <div class="card-header">
             <i class="fas fa-edit"></i> Firmalar
             <button class="btn btn-link collapsed float-right btn-sm" data-toggle="collapse"
@@ -15,6 +15,19 @@
             <a href="{{ route('company.index') }}" style="color: #5a6169">
                 <li class="list-group-item"><i class="fas fa-pencil-alt"></i> Firma Listesi</li>
             </a>
+
+            <a href="{{ route('position.create') }}" style="color: #5a6169">
+                <li class="list-group-item"><i class="fas fa-plus"></i> Yeni Pozisyon Ekle</li>
+            </a>
+            <a href="{{ route('position.index') }}" style="color: #5a6169">
+                <li class="list-group-item"><i class="fas fa-pencil-alt"></i> Pozisyon Listesi</li>
+            </a>
         </ul>
+    </div>
+
+    <div class="card">
+        <a class="card-header" href="#" style=" color: #5a6169">
+            <i class="fas fa-info-circle"></i> Sistem bilgileri
+        </a>
     </div>
 </div>

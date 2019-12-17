@@ -12,6 +12,7 @@ class Company extends Model
         'company_info',
         'address',
         'contact_info',
-
     ];
+
+    public $timestamps = false;
 }

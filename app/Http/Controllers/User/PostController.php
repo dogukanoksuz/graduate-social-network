@@ -32,6 +32,7 @@ class PostController extends Controller
         }
 
         $post = Post::create([
+            'type' => $request->share_selector,
             'content' => $request->post_content,
             'user_id' => $id
         ]);

@@ -1,40 +1,21 @@
 @extends('layouts.app')
 @section('title')
-    {{ $user->name }} - {{ config('app.name') }}
+    Staj ilanları - {{ config('app.name') }}
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                @include('elements.profile_embed')
-            </div>
             <div class="col-md-9">
-                @if (Auth::user()->id === $user->id)
-                    <div class="card  mb-5">
-                        <div class="card-header">
-                            Yeni bir paylaşım yap
-                        </div>
-                        <div class="card-body p-3">
-                            <form action="{{ route('profile.store_post', $user->id) }}" method="POST">
-                                @csrf
-                                <div class="input-group">
-                                    <textarea type="text" class="form-control" name="post_content"
-                                              placeholder="Bugün ne hissediyorsun?"></textarea>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit"><i
-                                                class="fas fa-paper-plane mr-1"></i> Paylaş
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                @endif
-
+                <div class="jumbotron">
+                    <p class="lead">Staj ilanlarını görüntülüyorsunuz.</p>
+                    <hr class="my-4">
+                    <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button">Sadece takip ettiklerimi
+                        göster</a>
+                </div>
                 @if (!empty($posts))
                     @foreach ($posts as $post)
-                        <div class="card  mb-5">
+                        <div class="card mb-5">
                             <div class="card-header">
                                 <a href="{{ route('profile.show', $post->user()->first()->id) }}"><img
                                         src="{{ $post->user()->first()->profile_picture }}"
@@ -124,6 +105,20 @@
                     @endforeach
                     {{ $posts->links() }}
                 @endif
+            </div>
+            <div class="col-md-3">
+                @php
+                    $user = Auth::user()
+                @endphp
+                @include('elements.profile_embed')
+                <div class="card  mt-5 mb-5">
+                    <div class="card-header">
+                        Yeni üyelerimiz
+                    </div>
+                    <div class="card-body p-3">
+                        @include('elements.new_members')
+                    </div>
+                </div>
             </div>
         </div>
     </div>

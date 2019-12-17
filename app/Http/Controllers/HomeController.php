@@ -46,4 +46,16 @@ class HomeController extends Controller
 
         return view('search', ['users' => $users, 'req' => $request]);
     }
+
+    public function jobAds()
+    {
+        $posts = Post::where('type', 'work')->orderBy('created_at', 'DESC')->paginate(25);
+        return view('jobAds', ['posts' => $posts]);
+    }
+
+    public function internAds()
+    {
+        $posts = Post::where('type', 'intern')->orderBy('created_at', 'DESC')->paginate(25);
+        return view('internAds', ['posts' => $posts]);
+    }
 }

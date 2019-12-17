@@ -4,10 +4,10 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             @include('superuser.nav')
-            <div class="col-lg-10">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">Hoşgeldiniz</div>
                     <div class="card-body">

@@ -75,7 +75,7 @@ class ProfileController extends Controller
                 $this->validate($request, [
                     'name' => 'required|string|max:255',
                     'email' => 'required|email|unique:users,email,' . $id,
-                    'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                     'about' => 'max:500'
                 ]);
             } catch (ValidationException $e) {

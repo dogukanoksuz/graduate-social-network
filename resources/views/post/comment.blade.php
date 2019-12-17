@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="card mb-5">
+                <div class="card  mb-5">
                     <div class="card-header">
                         <a href="{{ route('profile.show', $post->user()->first()->id) }}"><img
                                 src="{{ $post->user()->first()->profile_picture }}"
@@ -88,7 +88,7 @@
                 @php
                     $user = Auth::user()
                 @endphp
-                @include('profile.profile_embed')
+                @include('elements.profile_embed')
             </div>
         </div>
     </div>
