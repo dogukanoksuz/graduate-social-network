@@ -21,6 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('profile_picture')->default('/storage/profile/blank.jpg');
             $table->text('about')->nullable();
+            $table->date('graduation_date')->nullable();
+            $table->string('tc_no')->unique()->nullable();
+            $table->string('phone_no')->unique()->nullable();
             $table->rememberToken();
             $table->boolean('is_superuser')->default(false);
             $table->timestamps();

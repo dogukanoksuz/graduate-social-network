@@ -13,6 +13,46 @@
                     <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button">Sadece takip ettiklerimi
                         göster</a>
                 </div>
+                @if(!isset($search_values))
+                    <div class="card mb-5">
+                        <div class="card-body">
+                            <form action="{{ route('job-search') }}" method="GET">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="company">Şirket</label><br>
+                                        <select name="company" id="company" class="custom-select">
+                                            <option value="0" disabled selected>Şirket seçiniz</option>
+                                            @foreach ($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="position">Pozisyon</label><br>
+                                        <select name="position" id="position" class="custom-select">
+                                            <option value="0" disabled selected>Pozisyon seçiniz</option>
+                                            @foreach ($positions as $position)
+                                                <option value="{{ $position->id }}">{{ $position->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary w-100 h-100"><i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <div class="card mb-5">
+                        <div class="card-body text-center" style="font-family: 'Poppins';">
+                            <b>{{ $search_values[0] }}</b> şirketindeki <b>{{ $search_values[1] }}</b> pozisyonunda
+                            arama yapıyorsunuz.
+                        </div>
+                    </div>
+                @endif
                 @if (!empty($posts))
                     @foreach ($posts as $post)
                         <div class="card mb-5">

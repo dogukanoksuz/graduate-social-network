@@ -13,6 +13,49 @@
                     <a class="btn btn-primary btn-lg" href="{{ route('home') }}" role="button">Sadece takip ettiklerimi
                         göster</a>
                 </div>
+                @if(!isset($search_values))
+                    <div class="card mb-5">
+                        <div class="card-body">
+                            <form action="{{ route('intern-search') }}" method="GET">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="company">Şirket</label><br>
+                                        <select name="company" id="company" class="custom-select">
+                                            <option value="0" disabled selected>Şirket seçiniz</option>
+                                            @foreach ($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="staj_donemi">Staj dönemi</label><br>
+                                        <select name="staj_donemi" id="staj_donemi" class="custom-select">
+                                            <option value="0" disabled selected>Dönem seçiniz</option>
+                                            <option value="Yaz">Yaz</option>
+                                            <option value="Kış">Kış</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="position">Staj süresi</label><br>
+                                        <input type="number" name="sure" value="0" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary w-100 h-100"><i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <div class="card mb-5">
+                        <div class="card-body text-center" style="font-family: 'Poppins';">
+                            <b>{{ $search_values[0] }}</b> şirketindeki <b>{{ $search_values[1] }}</b> stajına
+                            arama yapıyorsunuz.
+                        </div>
+                    </div>
+                @endif
                 @if (!empty($posts))
                     @foreach ($posts as $post)
                         <div class="card mb-5">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Profil - {{ config('app.name') }}
+    Profil düzenle - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -10,6 +10,9 @@
                 <div class="list-group card">
                     <a href="{{ route('profile.edit', $user->id) }}"
                        class="list-group-item list-group-item-action active"><i class="fas fa-user mr-2"></i>Profil
+                        düzenle</a>
+                    <a href="{{ route('profile.edit_details', $user->id) }}"
+                       class="list-group-item list-group-item-action"><i class="fas fa-user mr-2"></i>Bilgileri
                         düzenle</a>
                     <a href="{{ route('profile.show', $user->id) }}" class="list-group-item list-group-item-action"><i
                             class="fas fa-chevron-left mr-2"></i>Profile dön</a>

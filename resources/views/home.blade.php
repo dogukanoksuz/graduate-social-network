@@ -169,7 +169,17 @@
                         @include('elements.new_members')
                     </div>
                 </div>
+                <div class="card  mt-5 mb-5">
+                    <div class="card-header">
+                        En çok paylaşım yapanlar
+                    </div>
+                    <div class="card-body p-3">
+                        @include('elements.most_shares')
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
 @endsection

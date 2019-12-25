@@ -20,7 +20,7 @@
 </div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
-         style="box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1">
+         style="box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1)">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <i class="fas fa-user-graduate mr-2"></i>{{ config('app.name', 'Laravel') }}
@@ -144,7 +144,8 @@
     </footer>
 </div>
 <!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+@yield('scriptContent')
 </body>
 </html>

@@ -26,7 +26,7 @@
     </div>
 
     <div class="card">
-        <a class="card-header" href="#" style=" color: #5a6169">
+        <a class="card-header" href="{{ route('superuser\systeminfo') }}" style=" color: #5a6169">
             <i class="fas fa-info-circle"></i> Sistem bilgileri
         </a>
     </div>

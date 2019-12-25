@@ -7,17 +7,18 @@
     <div class="container">
         <div class="row">
             @foreach($companies as $company)
-                <a href="{{ route('company.edit', $company->id) }}">
-                    <div class="col-md-4">
+                <div class="col-md-3 mb-3">
+                    <a href="{{ route('companies.show', $company->id) }}">
                         <div class="card">
                             <img src="{{ $company->picture }}" class="card-img-top"
                                  alt="{{ $company->name }}">
                             <div class="card-body text-center" style="padding: 15px">
                                 <h5 class="card-title">{{ $company->name }}</h5>
+                                {{ $company->about }}
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             @endforeach
             {{ $companies->links() }}
         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Company;
+use App\Company\Position;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Contracts\View\Factory;
@@ -9,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -154,4 +157,50 @@ class ProfileController extends Controller
 
         return view('profile.following', ['users' => $following]);
     }
+
+    public function edit_details($id)
+    {
+        if (Auth::user()->id == $id) {
+            $user = User::findOrFail($id);
+            $companies = Company::all();
+            $positions = Position::all();
+            return view('profile.edit_details',
+                ['user' => $user, 'positions' => $positions, 'companies' => $companies]);
+        }
+        return back();
+    }
+
+    public function update_details(Request $request, $id)
+    {
+        if (Auth::user()->id != $id)
+            back();
+
+        /*try {
+            $this->validate($request, [
+                'tc_no' => 'numeric|required|unique:users,tc_no',
+                'phone_no' => 'numeric|required|unique:users,phone_no',
+                'company' => 'required|exists:companies,id',
+                'position' => 'required|exists:positions,id'
+            ]);
+        } catch (ValidationException $e) {
+            return back()->withErrors(['Doğrulama hatası']);
+        }*/
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'tc_no' => $request->tc_no,
+            'phone_no' => $request->phone_no
+        ]);
+
+        $workDetails = DB::table('user_company_position')
+            ->updateOrInsert([
+                'user_id' => $id,
+                'company_id' => $request->company,
+                'position_id' => $request->position
+            ]);
+
+        return back()->with('success', 'Bilgileriniz başarıyla düzenlendi!');
+    }
 }
+

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_picture', 'about'
+        'name', 'email', 'password', 'profile_picture', 'about', 'graduation_date', 'tc_no', 'phone_no'
     ];
 
     /**
@@ -37,11 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function info()
-    {
-        return $this->hasMany(Info::class);
-    }
-
     public function post()
     {
         return $this->hasMany(Post::class);
@@ -59,8 +54,7 @@ class User extends Authenticatable
 
     public function isFollowing($id)
     {
-        foreach ($this->followings()->get() as $followings)
-        {
+        foreach ($this->followings()->get() as $followings) {
             if ($followings->id === $id)
                 return true;
         }
@@ -75,5 +69,15 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->belongsToMany('App\Post', 'likes', 'user_id', 'post_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsToMany('App\Company', 'user_company_position', 'company_id', 'user_id');
+    }
+
+    public function position()
+    {
+        return $this->belongsToMany('App\Company\Position', 'user_company_position', 'position_id', 'user_id');
     }
 }

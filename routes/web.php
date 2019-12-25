@@ -31,6 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
         'HomeController@internAds')
         ->name('intern');
 
+    Route::get('/search/intern',
+        'HomeController@internAdSearch')
+        ->name('intern-search');
+
+    Route::get('/search/jobs',
+        'HomeController@jobAdSearch')
+        ->name('job-search');
+
     // Search users
     Route::get('/search',
         'HomeController@search')
@@ -42,6 +50,14 @@ Route::group(['middleware' => ['auth']], function () {
         ->only([
             'index', 'show', 'edit', 'update'
         ]);
+
+    Route::get('/profile/{id}/edit-details',
+        'User\ProfileController@edit_details')
+        ->name('profile.edit_details');
+
+    Route::put('/profile/{id}/edit-details',
+        'User\ProfileController@update_details')
+        ->name('profile.update_details');
 
     // Create post
     Route::post('/profile/store-post/{id}',
@@ -100,6 +116,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/company',
         'User\CompanyController@index')
         ->name('companies.list');
+
+    Route::get('/company/{id}',
+        'User\CompanyController@show')
+        ->name('companies.show');
 });
 
 // Superuser routes
@@ -117,4 +137,9 @@ Route::group(['middleware' => ['auth', 'superuser']], function () {
     Route::resource('/superuser/company/position',
         'Superuser\PositionController')
         ->except('show');
+
+    // systeminfo
+    Route::get('/superuser/systeminfo',
+        'SuperuserController@systeminfo')
+        ->name('superuser\systeminfo');
 });
